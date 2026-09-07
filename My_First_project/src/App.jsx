@@ -1,6 +1,8 @@
 
+import { useState } from 'react';
 import './App.css'
 import Card from './components/Card';
+import Counter from './components/Counter';
 
 
 const members = [
@@ -12,10 +14,28 @@ const members = [
 
 function App() {
 
+    const [name,setName]=useState("");
+
+
+    const handleSubmit = (e) => {
+      
+        e.preventDefault();
+        console.log(name);
+
+
+
+    }
+
 
     return (
 
         <div>
+            <form onSubmit={(e)=>handleSubmit(e)}>
+
+                <input type="text" onChange={(e)=>setName(e.target.value)}/><br />
+                <button type='submit'>Submit</button>
+
+            </form>
 
 
             {
@@ -25,6 +45,8 @@ function App() {
                     )
                     )
             }
+
+            {/* <Counter></Counter> */}
 
         </div>
 

@@ -7,31 +7,27 @@ import "./Card.css"
 export default function Card({ name, age, address }) {
 
 
-    const [member, setMember] = useState("Badrul");
+    const [member, setMember] = useState("");
 
     let greetingText = "Hello";
     const clickHandler = (memberName) => {
 
 
-        console.log(greetingText + " " + memberName);
+        setMember(memberName);
 
 
     };
-    console.log(member);
-    const anotherClickHandler = (memberName) => {
-        console.log("Welcome Back", memberName);
-    }
-    const greetings = (name) => {
-        clickHandler(name);
-        anotherClickHandler(name);
-    }
+    
+   
+
+
 
     return (
         <>
             {
 
                 <div
-                    onClick={() => greetings(props.name)}
+                    onClick={() => clickHandler(name)}
 
                     className="card">
 
@@ -40,6 +36,7 @@ export default function Card({ name, age, address }) {
                     <h3>address : {address}</h3>
                     <h3>Age: {age}</h3>
                     <h4>{greetingText}</h4>
+                    {member&& <h5>Greetings {member}</h5>}
                 </div>
 
 
