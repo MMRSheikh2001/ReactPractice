@@ -19,20 +19,27 @@ function App() {
     const [address, setAddress] = useState("");
 
     const [members, setMembers] = useState([
-    { name: "Mahbub", age: "23", address: "Dhaka" },
-    { name: "Emon", age: "13", address: "Cumilla" },
-    { name: "sabbir", age: "19", address: "Natore" },
+        { name: "Mahbub", age: "23", address: "Dhaka" },
+        { name: "Emon", age: "13", address: "Cumilla" },
+        { name: "sabbir", age: "19", address: "Natore" },
 
-]);
+    ]);
 
 
     const handleSubmit = (e) => {
 
         e.preventDefault();
-        members.push({ name, age, address });
-        setMembers(members);
+
+        // setMembers([...members,{ name, age, address }]);
+        setMembers((prev) => [...prev, { name, age, address }])
+
         console.log(members);
-        
+
+        setName("");
+        setAge(0)
+        setAddress("");
+
+
 
     }
 
@@ -43,13 +50,13 @@ function App() {
             <form onSubmit={(e) => handleSubmit(e)}>
 
                 <label htmlFor="">Name</label>
-                <input type="text" onChange={(e) => setName(e.target.value)} /><br />
+                <input type="text" onChange={(e) => setName(e.target.value)} value={name} /><br />
 
                 <label htmlFor="">Age</label>
-                <input type="number" onChange={(e) => setAge(e.target.value)} /><br />
+                <input type="number" onChange={(e) => setAge(e.target.value)} value={age} /><br />
 
                 <label htmlFor="">Address</label>
-                <input type="text" onChange={(e) => setAddress(e.target.value)} /><br />
+                <input type="text" onChange={(e) => setAddress(e.target.value)} value={address} /><br />
                 <button type='submit'>Submit</button>
 
             </form>
