@@ -1,11 +1,12 @@
 import { useState } from "react";
+import "./Card.css";
 
 
 
 
-export default function Counter() {
+export default function Counter({count,setCount}) {
 
-    const [count, setCount] = useState(0);
+  
 
     const handleIncrement = () => {
         setCount(count + 1);
@@ -24,7 +25,7 @@ export default function Counter() {
 
 
     return (
-        <div>
+        <div className="card">
 
             <button onClick={handleIncrement}> Increment</button><br />
 
