@@ -1,10 +1,12 @@
 import './Card.css';
+import NestedDisplay from './NestedDisplay';
 
-export default function Display({count}) {
+export default function Display({ count }) {
 
     return <div className='card-blue'>
 
-        <h1>{count}</h1>
+        <p>Child Component</p>
+        <NestedDisplay count={count} />
 
 
     </div>

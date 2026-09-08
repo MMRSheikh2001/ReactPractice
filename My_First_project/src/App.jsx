@@ -1,30 +1,21 @@
 
-import { useState } from 'react';
+
+import { useEffect } from 'react'
 import './App.css'
-import Counter from './components/Counter';
-import Display from './components/Display.jsx';
 
 
-// const members = [
-//     { name: "Mahbub", age: "23", address: "Dhaka" },
-//     { name: "Emon", age: "13", address: "Cumilla" },
-//     { name: "sabbir", age: "19", address: "Natore" },
 
-// ];
 
 function App() {
+    useEffect();
 
-  const [count, setCount] = useState(0);
+    
 
     return (
 
-        <div>
-          
-
-            <Counter count={count} setCount={setCount} />
-            <Display count={count} />
-
-        </div>
+        <h1>
+            Hello World
+        </h1>
 
 
 
