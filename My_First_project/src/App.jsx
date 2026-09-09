@@ -1,21 +1,21 @@
 
 
-import { useEffect } from 'react'
 import './App.css'
+import DisplayUsers from './components/DisplayUsers'
 
 
 
 
 function App() {
-    useEffect();
 
-    
 
     return (
 
-        <h1>
-            Hello World
-        </h1>
+        <div>
+
+            <DisplayUsers />
+
+        </div>
 
 
 
