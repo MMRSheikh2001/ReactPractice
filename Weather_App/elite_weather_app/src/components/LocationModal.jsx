@@ -1,33 +1,59 @@
 import { X } from 'lucide-react';
 import { useState } from 'react';
 import { getGeoLocation } from '../services/get-geolocation';
+import { useNavigate } from 'react-router';
 
 
 export default function LocationModal({ onClose }) {
+
+    const navigate = useNavigate();
+
     const [city, setCity] = useState("");
+    const [error, setError] = useState("");
+
+
+    const goToPage = (location) => {
+        navigate("/weather", { state: { location } });
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const value = city.trim();
 
+        if (!value) {
+            setError("Please Enter a city Name");
+            return;
+        }
 
         try {
             const result = await getGeoLocation(value);
-            console.log(result);
+            // console.log(result);
+
+            if (!result) {
+                setError("Geo Request Failed");
+            } else {
+                goToPage(result);
+            }
         } catch (error) {
-            console.log(error);
+            setError(error);
         }
 
     }
 
     const handleGeoLocation = () => {
+        if(!navigator.geolocation){
+            setError("Geo Location Not found");
+            return;
+        }
 
         navigator.geolocation.getCurrentPosition((position) => {
 
             const { latitude, longitude } = position.coords;
-            console.log({ latitude, longitude });
+            //    console.log({ latitude, longitude });
+
+            goToPage({ name: "Your Location", lat: latitude, long: longitude })
         }, (error) => {
-            console.log(error);
+            setError(error);
         }, {
             timeout: 10000
         })
@@ -79,6 +105,14 @@ export default function LocationModal({ onClose }) {
                 hover:scale-105 transition-all delay-500">
                             Use My Location
                         </button>
+                    </div>
+
+                    <div className='text-center'>
+                        {
+                            error && <p className='text-red-600 text-md font-medium'>
+                                {error}
+                            </p>
+                        }
                     </div>
                 </div>
             </div>
