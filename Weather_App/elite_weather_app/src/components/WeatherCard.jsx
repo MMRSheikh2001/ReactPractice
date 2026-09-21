@@ -1,5 +1,5 @@
 import { Droplet, MapPin, Thermometer, Wind } from "lucide-react";
-import { getWeatherTheme } from "../utils/getTheme";
+import { getWeatherTheme } from "../utils/getThemes";
 
 export default function WeatherCard({ place, weather }) {
 
