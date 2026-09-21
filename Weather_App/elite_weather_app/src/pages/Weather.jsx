@@ -1,4 +1,4 @@
-import { useLocation } from "react-router"
+import { Link, useLocation } from "react-router"
 import { getWeather } from "../services/get-weather";
 import { useEffect, useState } from "react";
 import WeatherCard from "../components/WeatherCard";
@@ -6,12 +6,14 @@ import RecommendationCard from "../components/RecommendationCard";
 import WeatherType from "../components/WeatherType";
 import { getRecommendations } from "../utils/getRecommendation";
 import Loader from "../components/Loader";
-import { Link } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import LocationModal from "../components/LocationModal";
 
 export default function Weather() {
 
     const [weather, setWeather] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [open, setOpen] = useState(false);
 
     const value = useLocation();
     const place = value.state.location;
@@ -37,6 +39,7 @@ export default function Weather() {
 
             finally {
                 setLoading(false);
+                setOpen(false)
             }
         }
 
@@ -47,14 +50,38 @@ export default function Weather() {
 
     return (
         <div className="max-w-6xl mx-auto">
-            <header>
-                <div>
-                    <Link 
-                    className="border border-2 rounded-full px-2 py-1"
-                    to={"/"}>
-                        Back To Home
-                    </Link>
-                </div>
+            <header className="py-4">
+                {
+
+                    !loading && <div className="flex items-center justify-between">
+                        <div>
+                            <Link
+                                className="border border-2 rounded-full px-2 py-1"
+                                to={"/"}>
+                                <ArrowLeft size={16} />
+                                Back To Home
+                            </Link>
+                        </div>
+                        <div>
+                            <h1 className="text-xl text-blue-300">
+                                Elite <span className="text-blue-200  font-bold">Weather</span>
+                                App</h1>
+                        </div>
+
+                        <div>
+                            <button type="button"
+                                onClick={() => setOpen(true)}
+                                className="text-lg font-medium bg-blue-500 px-5 py-2  rounded-4xl
+                 text-gray-100
+                hover:scale-105 transition-all delay-500"
+                            >
+                                Change Location
+                            </button>
+
+                        </div>
+                    </div>
+
+                }
             </header>
             {
                 loading ? <Loader /> : <div className="grid md:grid-cols-2 gap-5">
@@ -75,6 +102,13 @@ export default function Weather() {
                     {/* weather type */}
                     <WeatherType weather={weather} place={place} />
                 </div>
+
+
+            }
+
+
+            {
+                open && <LocationModal onClose={() => setOpen(false)} />
             }
         </div>
     )
