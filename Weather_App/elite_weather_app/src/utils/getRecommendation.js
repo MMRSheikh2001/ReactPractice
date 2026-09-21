@@ -1,6 +1,6 @@
 const Rain = ["rain", "drizzle", "freezing_rain", "showers", "thunderstorm"];
 
-export function getRecommandations(weather) {
+export function getRecommendations(weather) {
     if (!weather) return null;
 
     // 1. Weather you need to prepare for.
