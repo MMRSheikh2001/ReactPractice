@@ -1,7 +1,15 @@
 import { MapPin } from "lucide-react";
+import StatCard from "./StatCard";
 
 
-export default function WeatherCard({weather,place}) {
+export default function WeatherCard({ weather, place }) {
+
+    const stat = [
+        { icon: '', label: "Feels Like", value: `${weather?.feelsLike}` },
+        { icon: '', label: "Humidity", value: `${weather?.humidity}` },
+        { icon: '', label: "Wind Speed", value: `${weather?.windSpeed}` },
+
+    ];
 
 
     return (
@@ -25,30 +33,14 @@ export default function WeatherCard({weather,place}) {
             </div>
 
             <div className="flex items-center justify-between">
-                <div className="shadow-2xl rounded-2xl p-4 text-center">
-                    <h3 className="text-lg text-purple-900 font-bold">
-                        Feels Like
-                    </h3>
-                    <p className="text-4xl text-purple-800 font-extrabold">
-                        {weather?.feelsLike}
-                    </p>
-                </div>
-                <div className="shadow-2xl rounded-2xl p-4 text-center">
-                    <h3 className="text-lg text-purple-900 font-bold">
-                        Humidity
-                    </h3>
-                    <p className="text-4xl text-purple-800 font-extrabold">
-                        {weather?.humidity}
-                    </p>
-                </div>
-                <div className="shadow-2xl rounded-2xl p-4 text-center">
-                    <h3 className="text-lg text-purple-900 font-bold">
-                        Wind Speed
-                    </h3>
-                    <p className="text-4xl text-purple-800 font-extrabold">
-                        {weather?.windSpeed}
-                    </p>
-                </div>
+
+                {
+                    stat.map((s, index) => {
+                        return (<StatCard key={index} s={s} />)
+                    })
+                }
+
+
 
 
             </div>
